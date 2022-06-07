@@ -16,7 +16,7 @@ import model.MyRect;
 
 /**
  *
- * @author Ngo Tung Son
+ * @author Adim
  */
 public class RectView extends HttpServlet {
    

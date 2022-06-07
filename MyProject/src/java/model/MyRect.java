@@ -6,7 +6,7 @@ package model;
 
 /**
  *
- * @author Ngo Tung Son
+ * @author Adim
  */
 public class MyRect {
     
