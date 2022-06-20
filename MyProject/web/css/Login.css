@@ -20,7 +20,7 @@ main{
 .background{
     height: 800px;
     background-color: #cccccc;
-    background-image: url(abc.jpg);
+    background-image: url(login.jpg);
     background-size: cover;
 }
 .container{
