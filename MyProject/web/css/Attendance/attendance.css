@@ -3,26 +3,28 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
 */
 /* 
-    Created on : Jun 20, 2022, 3:02:02 PM
+    Created on : Jun 21, 2022, 12:45:17 AM
     Author     : Admin
 */
+
 table, th, td {  
-    border: 2px solid #EEEEEE;  
+    border: 2px solid white;  
     border-collapse: collapse;  
-   width: 1000px;
+    width: 1000px;
 }  
 th, td {  
-    padding: 10px;  
+    padding: 5px;  
 }  
 tr{
     align-items: center;
     
 }
 body{
-    text-align: center;padding: 50px;
-    padding-left: 100px;
+    text-align: center;padding: 100px;
+    padding-left: 70px;
+    padding-top: 30px;
    
 }
-div{
+h1{
     text-align: left;
-}
+    }
