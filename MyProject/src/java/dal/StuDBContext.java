@@ -1,28 +1,46 @@
+
+
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package dal;
 
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import model.Dept;
-import model.Stu;
 
 /**
  *
  * @author Adim
  */
-public class StuDBContext extends DBContext<Stu> {
+public class StuDBContext extends DBContext<Deprecated> {
 
-    public ArrayList<Stu> searchByDid(int did) {
+    @Override
+    public ArrayList<Deprecated> list() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Deprecated get(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void insert(Deprecated model) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void update(Deprecated model) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void delete(Deprecated model) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+  /**  public ArrayList<Stu> searchByDid(int did) {
         ArrayList<Stu> stu = new ArrayList<>();
         try {
             String sql = "SELECT e.eid,e.ename,e.gender,e.dob,d.did,d.dname\n"
@@ -208,5 +226,5 @@ public class StuDBContext extends DBContext<Stu> {
             Logger.getLogger(StuDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+*/
 }
