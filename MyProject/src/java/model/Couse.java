@@ -18,7 +18,7 @@ public class Couse {
     int slot;
     String room;
     Date date;
-
+    int numberOfWeek;
     public int getId() {
         return id;
     }
@@ -77,7 +77,13 @@ public class Couse {
     public void setDate(Date date) {
         this.date = date;
     }
+ public int getNumberOfWeek() {
+        return numberOfWeek;
+    }
 
+    public void setNumberOfWeek(int numberOfWeek) {
+        this.numberOfWeek = numberOfWeek;
+    }
     @Override
     public String toString() {
         return group + "-" + course+ "at" + room + "(" + slot + ")";
