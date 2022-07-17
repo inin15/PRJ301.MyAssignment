@@ -18,8 +18,9 @@ import model.Weekly;
  *
  * @author Admin
  */
-public class WeeklyDBContext extends DBContext<Weekly>{
-public void generateWeek() {
+public class WeeklyDBContext extends DBContext<Weekly> {
+
+    public void generateWeek() {
         //tao table
         //createTable();
         //1 nam co khoang 53 tuan
@@ -35,16 +36,17 @@ public void generateWeek() {
             numberOfWeek--;
         }
     }
+
     @Override
     public ArrayList<Weekly> list() {
         try {
-            ArrayList<Weekly> arr= new ArrayList<>();
+            ArrayList<Weekly> arr = new ArrayList<>();
             PreparedStatement sql = connection.prepareStatement("SELECT [no]\n"
                     + "      ,[dfrom]\n"
                     + "      ,[dto]\n"
-                    + "  FROM [Week]");
+                    + "  FROM [Weekly]");
             ResultSet rs = sql.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 Weekly a = new Weekly();
                 a.setNo(rs.getInt("no"));
                 a.setDfrom(rs.getDate("dfrom"));
@@ -55,7 +57,8 @@ public void generateWeek() {
         } catch (SQLException ex) {
             Logger.getLogger(CouseDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;  }
+        return null;
+    }
 
     @Override
     public ArrayList<Weekly> list(int did) {
@@ -83,11 +86,11 @@ public void generateWeek() {
     }
 
     private void addAWeek(int i, LocalDate df) {
-         Date dto = Date.valueOf(df.plusDays(6));
+        Date dto = Date.valueOf(df.plusDays(6));
         Date dfrom = Date.valueOf(df);
         int no = i;
         try {
-            PreparedStatement sql = connection.prepareStatement("INSERT INTO [Week]\n"
+            PreparedStatement sql = connection.prepareStatement("INSERT INTO [Weekly]\n"
                     + "           ([no]\n"
                     + "           ,[dfrom]\n"
                     + "           ,[dto])\n"
@@ -101,11 +104,12 @@ public void generateWeek() {
             ResultSet rs = sql.executeQuery();
         } catch (SQLException ex) {
             Logger.getLogger(CouseDBContext.class.getName()).log(Level.SEVERE, null, ex);
-        }    
+        }
     }
-     public void createTable() {
+
+    public void createTable() {
         try {
-            PreparedStatement sql = connection.prepareStatement("create table [Week](\n"
+            PreparedStatement sql = connection.prepareStatement("create table [Weekly](\n"
                     + "	[no] [int] not null primary key,\n"
                     + "	[dfrom] [date] not null,\n"
                     + "	[dto] [date] not null\n"
@@ -156,5 +160,5 @@ public void generateWeek() {
             Logger.getLogger(CouseDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
 }

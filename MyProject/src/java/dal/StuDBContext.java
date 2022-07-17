@@ -29,8 +29,8 @@ public class StuDBContext extends DBContext<Students> {
     public ArrayList<Students> list(int couseID) {
         try {
             ArrayList<Students> ds = new ArrayList<>();
-            PreparedStatement sql = connection.prepareStatement("select Student.*\n"
-                    + "	from Student join GroupStudent on Student.id=GroupStudent.id\n"
+            PreparedStatement sql = connection.prepareStatement("select Students.*\n"
+                    + "	from Students join GroupStudent on Student.id=GroupStudent.id\n"
                     + "	where GroupStudent.[group] in (select [Group].[group] \n"
                     + "	from [Group] join Lesson on [Group].[group]= Lesson.[group]\n"
                     + "	where Lesson.id = ?)");

@@ -22,7 +22,7 @@ public class CouseDBContext extends DBContext<Couse> {
     public ArrayList<Couse> list() {
         try {
             ArrayList<Couse> ds = new ArrayList<>();
-            PreparedStatement sql = connection.prepareStatement("select * from [Lesson]");
+            PreparedStatement sql = connection.prepareStatement("select * from [Couse]");
             ResultSet rs = sql.executeQuery();
             while (rs.next()) {
                 Couse a = new Couse();
@@ -46,7 +46,7 @@ public class CouseDBContext extends DBContext<Couse> {
         int slot = did;
         try {
             ArrayList<Couse> ds = new ArrayList<>();
-            PreparedStatement sql = connection.prepareStatement("select *\n" + "from [Lesson] where slot = ? and numberOfWeek= ?");
+            PreparedStatement sql = connection.prepareStatement("select *\n" + "from [Couse] where slot = ? and numverOfWeek= ?");
             sql.setInt(1, slot);
             sql.setInt(2, numberOfWeek);
             ResultSet rs = sql.executeQuery();
@@ -86,6 +86,11 @@ public class CouseDBContext extends DBContext<Couse> {
 
     @Override
     public boolean delete(Couse model) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public ArrayList<Couse> list(int did) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
