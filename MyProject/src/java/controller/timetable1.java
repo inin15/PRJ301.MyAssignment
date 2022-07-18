@@ -1,3 +1,8 @@
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
 package controller;
 
 import dal.CouseDBContext;
@@ -23,7 +28,7 @@ import model.Weekly;
  *
  * @author Admin
  */
-public class timetable extends HttpServlet {
+public class timetable1 extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -57,43 +62,24 @@ public class timetable extends HttpServlet {
             return;
         }
         
+        //input: no
+        //output: campusList
+        //        weekList
+        //to Timetable3.jsp
         ArrayList<String> campusList = new ArrayList<>();
         campusList.add("FU-HL");
-        campusList.add("FU-Hồ Chí Minh");
-        campusList.add("FU-Đà Nẵng");
+        //campusList.add("FU-Hồ Chí Minh");
+        //campusList.add("FU-Đà Nẵng");
         request.setAttribute("campusList", campusList);
         WeeklyDBContext wDBC = new WeeklyDBContext();
         ArrayList<Weekly> weekList = wDBC.list();
         request.setAttribute("weekList", weekList);
-        //input:campus(String),
-        //      lecture(String)         
-        //      noOfWeek(int)        Ex: 2
-        //output:7 dayOfWeeks (of this week, now) Ex: 10/1/2022 to 16/1/2022 (for week 2)
-        //       numberOfWeek(int) (of this week, now)
-        //         lessons (arrayList)   all lesson of this week(now) for that input 
-        //       statusList (ArrayList<String>) (dua vao lessons ben tren)
-//Date: now  
-        String campus = request.getParameter("campus");
-        String lecture = request.getParameter("lecture");
-        //return output numberOfWeek(int) 
-        int numberOfWeek = Integer.parseInt(request.getParameter("numberOfWeek"));
-        request.setAttribute("numberOfWeek",numberOfWeek);
-        //System.out.println(start.toString()+"------"+end.toString()+"------"+numberOfWeekNow+"------------"+(double)DAYS.between(end,start)/7);
-        //return output 7 dayOfWeeks (of this week, now):
-        request.setAttribute("dayOfWeeks",wDBC.getDaysOfWeek(numberOfWeek));
+        request.setAttribute("numberOfWeek", 1);
+        int numberOfWeek = 1;
+        //return output dayOfWeeks:
+        request.setAttribute("dayOfWeeks", wDBC.getDaysOfWeek(numberOfWeek));
         //return output lessons
-        CouseDBContext lDBC = new CouseDBContext();
-        ArrayList<Couse> lessons = lDBC.listAllCouseInThisWeekAndLecture(numberOfWeek, lecture);
-        request.setAttribute("lessons", lessons);
-        //return output statusList
-        ArrayList<String> statusList = new ArrayList<>();
-        StudentCouseDBContext slDBC = new StudentCouseDBContext();
-        for(Couse a: lessons){
-            int status = slDBC.getStatus(a);
-            if(status ==0){continue;}
-            if(status >0){statusList.add(a.getId()+"_"+slDBC.getStatus(a));}
-        }
-        request.setAttribute("statuses", statusList);
+        request.setAttribute("lessons", null);
         request.getRequestDispatcher("view/weeklytimetable.jsp").forward(request, response);
     }
 
@@ -108,7 +94,56 @@ public class timetable extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         processRequest(request, response);
+        HttpSession aSession = request.getSession();
+        Account acc=(Account)aSession.getAttribute("acc");
+        if(acc==null){
+            response.getWriter().print("access denied");
+            return;
+        }
+        
+        String howToView = request.getParameter("howToView");
+        if (howToView.equals("viewInThisPage2")) {
+            return;
+        }else if(howToView.equals("View")){
+            //tiep tuc
+        }
+        ArrayList<String> campusList = new ArrayList<>();
+        campusList.add("FU-HL");
+        campusList.add("FU-Hồ Chí Minh");
+        campusList.add("FU-Đà Nẵng");
+        request.setAttribute("campusList", campusList);
+        WeeklyDBContext wDBC = new WeeklyDBContext();
+        ArrayList<Weekly> weekList = wDBC.list();
+        request.setAttribute("weekList", weekList);
+        //input:campus(String),
+        //      lecture(String)                        Ex: Thay A
+        //output:7 dayOfWeeks (of this week, now)      Ex: 10/1/2022 to 16/1/2022 (for week 2)
+        //       numberOfWeek(int) (of this week, now) Ex: 2
+        //       lessons (arrayList)   all lesson of this week(now) for that input 
+        //       statusList (ArrayList<String>) (dua vao lessons ben tren)
+        String campus = request.getParameter("campus");
+        String lecture = request.getParameter("lecture");
+        //return output numberOfWeek(int) (of this week, now)
+        LocalDate start = LocalDate.now();
+        LocalDate end = LocalDate.parse("2022-01-02");
+        int numberOfWeekNow = (int) Math.ceil((double) DAYS.between(end, start) / 7);
+        request.setAttribute("numberOfWeek", numberOfWeekNow);
+        //return output 7 dayOfWeeks (of this week, now):
+        request.setAttribute("dayOfWeeks", wDBC.getDaysOfWeek(numberOfWeekNow));
+        //return output lessons
+        CouseDBContext lDBC = new CouseDBContext();
+        ArrayList<Couse> couses = lDBC.listAllCouseInThisWeekAndLecture(numberOfWeekNow, lecture);
+        request.setAttribute("lessons", couses);
+        //return output statusList
+        ArrayList<String> statusList = new ArrayList<>();
+        StudentCouseDBContext slDBC = new StudentCouseDBContext();
+        for(Couse a: couses){
+            int status = slDBC.getStatus(a);
+            if(status ==0){continue;}
+            if(status >0){statusList.add(a.getId()+"_"+slDBC.getStatus(a));}
+        }
+        request.setAttribute("statuses", statusList);
+        request.getRequestDispatcher("view/weeklytimetable.jsp").forward(request, response);
     }
 
     /**
