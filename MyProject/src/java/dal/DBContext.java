@@ -10,10 +10,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Account;
 
 /**
  *
- * @author Adim
+ * @author Ngo Tung Son
  */
 public abstract class DBContext<T> {
     protected Connection connection;
@@ -30,10 +31,12 @@ public abstract class DBContext<T> {
         }
     }
     
+     public abstract ArrayList<T> list(int did);
     public abstract ArrayList<T> list();
-    public abstract ArrayList<T> list(int did);
     public abstract T get(int id);
-    public abstract boolean insert(T model);
-    public abstract boolean update(T model);
-    public abstract boolean delete(T model);
+    public abstract void insert(T model);
+    public abstract void update(T model);
+    public abstract void delete(T model);
+   
 }
+    

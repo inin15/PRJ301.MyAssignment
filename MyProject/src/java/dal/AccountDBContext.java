@@ -14,7 +14,7 @@ import model.Account;
 
 /**
  *
- * @author Adim
+ * @author Ngo Tung Son
  */
 public class AccountDBContext extends DBContext<Account> {
 
@@ -50,17 +50,17 @@ public class AccountDBContext extends DBContext<Account> {
     }
 
     @Override
-    public boolean insert(Account model) {
+    public void insert(Account model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public boolean update(Account model) {
+    public void update(Account model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public boolean delete(Account model) {
+    public void delete(Account model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -68,5 +68,6 @@ public class AccountDBContext extends DBContext<Account> {
     public ArrayList<Account> list(int did) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
 
 }

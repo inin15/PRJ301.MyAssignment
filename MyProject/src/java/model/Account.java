@@ -6,7 +6,7 @@ package model;
 
 /**
  *
- * @author Adim
+ * @author Admin
  */
 public class Account {
     private String username;
