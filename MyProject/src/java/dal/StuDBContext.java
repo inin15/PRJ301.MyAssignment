@@ -21,25 +21,26 @@ import model.Students;
  */
 public class StuDBContext extends DBContext<Students> {
 
-    @Override
+   @Override
     public ArrayList<Students> list() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
     @Override
-    public ArrayList<Students> list(int couseID) {
+    public ArrayList<Students> list(int lessonID) {
         try {
             ArrayList<Students> ds = new ArrayList<>();
             PreparedStatement sql = connection.prepareStatement("select Students.*\n"
-                    + "	from Students join GroupStudent on Student.id=GroupStudent.id\n"
-                    + "	where GroupStudent.[group] in (select [Group].[group] \n"
-                    + "	from [Group] join Lesson on [Group].[group]= Lesson.[group]\n"
-                    + "	where Lesson.id = ?)");
-            sql.setInt(1, couseID);
+                    + "	from Students join GroupStudent on Student.id=GroupStudent.StudentID\n"
+                    + "	where GroupStudent.[group] in (\n"
+                    + "			select [Group].[group] \n"
+                    + "			from [Group] join Couse on [Group].[group]= Couse.[group]\n"
+                    + "			where Couse.id = ?\n"
+                    + "			)");
+            sql.setInt(1, lessonID);
             ResultSet rs = sql.executeQuery();
             while (rs.next()) {
-                Students a = new Students();
-                a.setId(rs.getString("id"));
-                a.setName(rs.getString("name"));
+                Students a = new Students(rs.getString("id"),rs.getString("name"));
                 ds.add(a);
             }
             System.out.println("----------------" + ds.size());
@@ -56,19 +57,18 @@ public class StuDBContext extends DBContext<Students> {
     }
 
     @Override
-    public void insert(Students model) {
+    public boolean insert(Students model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void update(Students model) {
+    public boolean update(Students model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void delete(Students model) {
+    public boolean delete(Students model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-  
    
 }

@@ -12,14 +12,13 @@ import java.sql.Date;
  */
 public class Couse {
 
-    int id;
-    String group;
-    String course;
-    String instructor;
-    int slot;
-    String room;
-    Date date;
-    int numberOfWeek;
+   private int id;
+    private Group group;
+    private String name; 
+    private int slot;
+    private String room;
+    private Date date;
+    private int numberOfWeek;
 
     public int getId() {
         return id;
@@ -32,29 +31,23 @@ public class Couse {
     public Couse() {
     }
 
-    public String getGroup() {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Group getGroup() {
         return group;
     }
 
-    public void setGroup(String group) {
+    public void setGroup(Group group) {
         this.group = group;
     }
 
-    public String getCourse() {
-        return course;
-    }
-
-    public void setCourse(String course) {
-        this.course = course;
-    }
-
-    public String getInstructor() {
-        return instructor;
-    }
-
-    public void setInstructor(String instructor) {
-        this.instructor = instructor;
-    }
+ 
 
     public int getSlot() {
         return slot;
@@ -87,9 +80,13 @@ public class Couse {
     public void setNumberOfWeek(int numberOfWeek) {
         this.numberOfWeek = numberOfWeek;
     }
-@Override
+ @Override
     public String toString() {
-        return group + "-" + course+ "at" + room + "(" + slot + ")";
+        return "Lesson{" + "id=" + id + ", group=" + group + "\n, name=" + name + ", slot=" + slot + ", room=" + room + "\n, date=" + date + ", numberOfWeek=" + numberOfWeek + '}';
     }
+   public String toString1() {
+        return group.getId() + "<br>-" + group.getSubject().getId() + "<br>at " + room;
+    }
+   
    
 }

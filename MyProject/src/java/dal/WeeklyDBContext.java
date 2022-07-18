@@ -20,7 +20,7 @@ import model.Weekly;
  */
 public class WeeklyDBContext extends DBContext<Weekly> {
 
-    public void generateWeek() {
+     public void generateWeek() {
         //tao table
         //createTable();
         //1 nam co khoang 53 tuan
@@ -40,13 +40,13 @@ public class WeeklyDBContext extends DBContext<Weekly> {
     @Override
     public ArrayList<Weekly> list() {
         try {
-            ArrayList<Weekly> arr = new ArrayList<>();
+            ArrayList<Weekly> arr= new ArrayList<>();
             PreparedStatement sql = connection.prepareStatement("SELECT [no]\n"
                     + "      ,[dfrom]\n"
                     + "      ,[dto]\n"
-                    + "  FROM [Weekly]");
+                    + "  FROM [Week]");
             ResultSet rs = sql.executeQuery();
-            while (rs.next()) {
+            while(rs.next()){
                 Weekly a = new Weekly();
                 a.setNo(rs.getInt("no"));
                 a.setDfrom(rs.getDate("dfrom"));
@@ -60,14 +60,37 @@ public class WeeklyDBContext extends DBContext<Weekly> {
         return null;
     }
 
-   
+    @Override
+    public ArrayList<Weekly> list(int did) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
-    private void addAWeek(int i, LocalDate df) {
+    @Override
+    public Weekly get(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public boolean insert(Weekly model) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public boolean update(Weekly model) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public boolean delete(Weekly model) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void addAWeek(int i, LocalDate df) {
         Date dto = Date.valueOf(df.plusDays(6));
         Date dfrom = Date.valueOf(df);
         int no = i;
         try {
-            PreparedStatement sql = connection.prepareStatement("INSERT INTO [Weekly]\n"
+            PreparedStatement sql = connection.prepareStatement("INSERT INTO [Week]\n"
                     + "           ([no]\n"
                     + "           ,[dfrom]\n"
                     + "           ,[dto])\n"
@@ -82,11 +105,12 @@ public class WeeklyDBContext extends DBContext<Weekly> {
         } catch (SQLException ex) {
             Logger.getLogger(CouseDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     public void createTable() {
         try {
-            PreparedStatement sql = connection.prepareStatement("create table [Weekly](\n"
+            PreparedStatement sql = connection.prepareStatement("create table [Week](\n"
                     + "	[no] [int] not null primary key,\n"
                     + "	[dfrom] [date] not null,\n"
                     + "	[dto] [date] not null\n"
@@ -137,30 +161,30 @@ public class WeeklyDBContext extends DBContext<Weekly> {
             Logger.getLogger(CouseDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    @Override
-    public ArrayList<Weekly> list(int did) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public Weekly get(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void insert(Weekly model) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void update(Weekly model) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void delete(Weekly model) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    
+    public ArrayList<Date> getDaysOfWeek(int noOfWeek){
+        //output:7 dayOfWeeks (arrayList) Ex: 10/1/2022 to 16/1/2022 (for week 2)
+        ArrayList<Date> arr = new ArrayList<>();
+        try {
+            PreparedStatement sql = connection.prepareStatement("select * from Week where no = ?");
+            sql.setInt(1, noOfWeek);
+            ResultSet rs = sql.executeQuery();
+            if(rs.next()){
+                Date dfrom = rs.getDate("dfrom");
+                //add to array from this dfrom and 6 day followed 
+                arr.add(Date.valueOf(dfrom.toLocalDate().plusDays(0)));
+                arr.add(Date.valueOf(dfrom.toLocalDate().plusDays(1)));
+                arr.add(Date.valueOf(dfrom.toLocalDate().plusDays(2)));
+                arr.add(Date.valueOf(dfrom.toLocalDate().plusDays(3)));
+                arr.add(Date.valueOf(dfrom.toLocalDate().plusDays(4)));
+                arr.add(Date.valueOf(dfrom.toLocalDate().plusDays(5)));
+                arr.add(Date.valueOf(dfrom.toLocalDate().plusDays(6)));
+            }
+            return arr;
+        } catch (SQLException ex) {
+            Logger.getLogger(CouseDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
 }

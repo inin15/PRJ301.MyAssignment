@@ -8,14 +8,11 @@ package model;
  *
  * @author Admin
  */
-public class Students {
-    String id;
-    String name;
+public class Subject {
+     private String id;
+    private String name;
 
-    public Students() {
-    }
-
-    public Students(String id, String name) {
+    public Subject(String id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -38,7 +35,6 @@ public class Students {
 
     @Override
     public String toString() {
-        return "Students{" + "id=" + id  + ", name=" + name + '}';
+        return "Course{" + "id=" + id + ", name=" + name + '}';
     }
-
 }

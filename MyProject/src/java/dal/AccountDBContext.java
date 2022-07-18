@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Account;
+import model.Instructor;
 
 /**
  *
@@ -18,23 +19,36 @@ import model.Account;
  */
 public class AccountDBContext extends DBContext<Account> {
 
-    public Account getAccountByUsernamePassword(String username, String password) {
+   public boolean isExistInDB(String name, String password){
         try {
-            String sql = "SELECT username,displayname FROM Account\n"
-                    + "WHERE username = ? AND password = ?";
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, username);
-            stm.setString(2, password);
-            ResultSet rs = stm.executeQuery();
-            if(rs.next())
-            {
-                Account account = new Account();
-                account.setUsername(rs.getString("username"));
-                account.setDisplayName(rs.getString("displayname"));
-                return account;
+            PreparedStatement sql = connection.prepareStatement("select * from [Account] where name =? and password=?");
+            sql.setString(1, name);
+            sql.setString(2, password);
+            ResultSet rs = sql.executeQuery();
+            if (rs.next()) {
+                return true;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CouseDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
+    public Account getAccount(String name, String password){
+        try {
+            PreparedStatement sql = connection.prepareStatement("select [Account].*,[Instructor].name as InstructorName from [Account] join [Instructor] on [Account].InstructorID = [Instructor].id where [Account].name =? and [Account].password=?");
+            sql.setString(1, name);
+            sql.setString(2, password);
+            ResultSet rs = sql.executeQuery();
+            if (rs.next()) {
+                Account hehe = new Account();
+                hehe.setPassword(password);
+                hehe.setUsername(name);
+                hehe.setInstructor(new Instructor(rs.getString("InstructorID"),rs.getString("InstructorName")));
+                return hehe;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CouseDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -45,29 +59,30 @@ public class AccountDBContext extends DBContext<Account> {
     }
 
     @Override
+    public ArrayList<Account> list(int did) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
     public Account get(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void insert(Account model) {
+    public boolean insert(Account model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void update(Account model) {
+    public boolean update(Account model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void delete(Account model) {
+    public boolean delete(Account model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
-    @Override
-    public ArrayList<Account> list(int did) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
     
 
 }

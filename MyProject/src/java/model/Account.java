@@ -12,7 +12,9 @@ public class Account {
     private String username;
     private String password;
     private String displayName;
+    private Instructor instructor;
 
+   
     public String getUsername() {
         return username;
     }
@@ -36,5 +38,13 @@ public class Account {
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
     }
+     public Instructor getInstructor() {
+        return instructor;
+    }
+
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
+    }
+    
     
 }

@@ -14,7 +14,7 @@ import model.Account;
 
 /**
  *
- * @author Ngo Tung Son
+ * @author Admin
  */
 public abstract class DBContext<T> {
     protected Connection connection;
@@ -31,12 +31,12 @@ public abstract class DBContext<T> {
         }
     }
     
-     public abstract ArrayList<T> list(int did);
-    public abstract ArrayList<T> list();
+     public abstract ArrayList<T> list();
+    public abstract ArrayList<T> list(int did);
     public abstract T get(int id);
-    public abstract void insert(T model);
-    public abstract void update(T model);
-    public abstract void delete(T model);
+    public abstract boolean insert(T model);
+    public abstract boolean update(T model);
+    public abstract boolean delete(T model);
    
 }
     

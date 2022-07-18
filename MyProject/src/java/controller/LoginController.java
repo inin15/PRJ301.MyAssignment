@@ -16,7 +16,7 @@ import model.Account;
 
 /**
  *
- * @author Ngo Tung Son
+ * @author Admin
  */
 public class LoginController extends HttpServlet {
    
