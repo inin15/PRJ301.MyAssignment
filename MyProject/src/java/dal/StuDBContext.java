@@ -31,7 +31,7 @@ public class StuDBContext extends DBContext<Students> {
         try {
             ArrayList<Students> ds = new ArrayList<>();
             PreparedStatement sql = connection.prepareStatement("select Students.*\n"
-                    + "	from Students join GroupStudent on Student.id=GroupStudent.StudentID\n"
+                    + "	from Students join GroupStudent on Students.id=GroupStudent.StudentID\n"
                     + "	where GroupStudent.[group] in (\n"
                     + "			select [Group].[group] \n"
                     + "			from [Group] join Couse on [Group].[group]= Couse.[group]\n"

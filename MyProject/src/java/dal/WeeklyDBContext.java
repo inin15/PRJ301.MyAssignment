@@ -44,7 +44,7 @@ public class WeeklyDBContext extends DBContext<Weekly> {
             PreparedStatement sql = connection.prepareStatement("SELECT [no]\n"
                     + "      ,[dfrom]\n"
                     + "      ,[dto]\n"
-                    + "  FROM [Week]");
+                    + "  FROM [Weekly]");
             ResultSet rs = sql.executeQuery();
             while(rs.next()){
                 Weekly a = new Weekly();

@@ -5,7 +5,7 @@
         <servlet-class>controller.LoginController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Timetable</servlet-name>
+        <servlet-name>timetable</servlet-name>
         <servlet-class>controller.timetable</servlet-class>
     </servlet>
     <servlet-mapping>
@@ -13,7 +13,7 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Timetable</servlet-name>
+        <servlet-name>timetable</servlet-name>
         <url-pattern>/timetable</url-pattern>
     </servlet-mapping>
     <session-config>

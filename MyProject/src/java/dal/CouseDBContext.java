@@ -31,7 +31,7 @@ public class CouseDBContext extends DBContext<Couse> {
                 a.setId(rs.getInt("id"));
                 a.setSlot(rs.getInt("slot"));
                 a.setDate(rs.getDate("date"));
-                //a.setGroup(rs.getObject("group", new <Couse>()));
+                //a.setGroup(rs.getString("group"));
                 a.setName(rs.getString("name"));
                 //a.setCourse(rs.getString("course"));
                 //a.setInstructor(rs.getString("instructor"));
@@ -80,13 +80,13 @@ public class CouseDBContext extends DBContext<Couse> {
             PreparedStatement sql = connection.prepareStatement("SELECT *\n"
                     + "FROM\n"
                     + "(\n"
-                    + "	select [group], GroupInstructor.InstructorID as instructorID , GroupInstructor.CourseID as courseID, Course.name as courseName, GroupInstructor.name as instructorName  \n"
+                    + "	select [group], GroupInstructor.InstructorID as instructorID , GroupInstructor.CourseID as subjectID, Subject.name as subjectName, GroupInstructor.name as instructorName  \n"
                     + "	from \n"
                     + "	(select * from [Group] join Instructor on Instructor.id = [Group].InstructorID  where Instructor.name like ?) GroupInstructor \n"
-                    + "	join Course on Course.id= GroupInstructor.CourseID\n"
+                    + "	join Subject on Subject.id= GroupInstructor.CourseID\n"
                     + ") group1,\n"
-                    + "(select * from Couse where Couse.numberOfWeek = ?) lesson1\n"
-                    + "WHERE group1.[group] = lesson1.[group]");
+                    + "(select * from Subject where Subject.numberOfWeek = ?) couse1\n"
+                    + "WHERE group1.[group] = couse1.[group]");
             sql.setString(1, "%"+lecture+"%");
             sql.setInt(2, numberOfWeek);
             ResultSet rs = sql.executeQuery();

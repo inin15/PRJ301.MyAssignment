@@ -63,7 +63,7 @@
         <dava:forEach items="${requestScope.slot3}" var="aCouse">
             <%--print a lesson--%>
             <%--CHANGE LESSON TO A LINK TO SERVLET that is responsible for do attendance--%>
-            <p><a href ="attendanceForACouse?id=${aCouse.id}&group=${aCouse.group}&course=${aCouse.course}&instructor=${aCouse.instructor}
+            <p><a href ="attendanceForACouse?id=${aCouse.id}&group=${aCouse.group}&course=${aCouse.couse}&instructor=${aCouse.instructor}
                   &slot=${aCouse.slot}&room=${aCouse.room}&date=${aCouse.date}" target="_blank">   ${aCouse}</a></p>
         </dava:forEach>
             

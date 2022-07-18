@@ -30,8 +30,8 @@ public class StudentCouseDBContext extends DBContext<StudentCouse> {
     public ArrayList<StudentCouse> list(int lessonID) {
         try {
             ArrayList<StudentCouse> ds = new ArrayList<>();
-            PreparedStatement sql = connection.prepareStatement("select sl.*,s.name as studentName from StudentCouse sl,Student s\n"
-                    + "where s.id = sl.StudentID and sl.CouseID =?");
+            PreparedStatement sql = connection.prepareStatement("select sl.*,s.name as studentName from StudentCouse sl,Students s\n"
+                    + "where s.id = sl.StudentID and sl.LessonID =?");
             sql.setInt(1, lessonID);
             ResultSet rs = sql.executeQuery();
             while (rs.next()) {
@@ -67,7 +67,7 @@ public class StudentCouseDBContext extends DBContext<StudentCouse> {
             ArrayList<StudentCouse> ds = new ArrayList<>();
             PreparedStatement sql = connection.prepareStatement("UPDATE StudentCouse\n"
                     + "SET StudentCouse.status = ?, StudentCouse.note = ?, StudentCouse.recordTime = ?\n"
-                    + "WHERE StudentCouse.CouseID= ? and StudentCouse.StudentID = ?");
+                    + "WHERE StudentCouse.LessonID= ? and StudentCouse.StudentID = ?");
             sql.setBoolean(1, model.isStatus());
             sql.setString(2, model.getNote());
             sql.setString(3, model.getRecordTime());
@@ -83,7 +83,7 @@ public class StudentCouseDBContext extends DBContext<StudentCouse> {
     public boolean add(StudentCouse model) {
         try {
             ArrayList<StudentCouse> ds = new ArrayList<>();
-            PreparedStatement sql = connection.prepareStatement("INSERT INTO StudentCouse (StudentCouse.CouseID, StudentCouse.StudentID, StudentCouse.status, StudentCouse.note, StudentCouse.recordTime)\n"
+            PreparedStatement sql = connection.prepareStatement("INSERT INTO StudentCouse (StudentCouse.LessonID, StudentCouse.StudentID, StudentCouse.status, StudentCouse.note, StudentCouse.recordTime)\n"
                     + "VALUES (?, ?, ?, ?,?)");
             sql.setString(1, Integer.toString(model.getCouse().getId()));
             sql.setString(2, model.getStudent().getId());
