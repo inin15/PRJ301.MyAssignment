@@ -13,8 +13,7 @@ public class Group {
     private Subject subject;
     private Instructor instructor;
 
-    public Group() {
-    }
+   
 
     public Group(String id, Subject subject, Instructor instructor) {
         this.id = id;
@@ -22,7 +21,8 @@ public class Group {
         this.instructor = instructor;
     }
 
-   
+    public Group(String string) {
+           }
 
     public String getId() {
         return id;

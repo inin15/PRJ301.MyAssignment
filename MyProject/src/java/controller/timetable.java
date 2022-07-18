@@ -21,7 +21,7 @@ import model.Weekly;
 
 /**
  *
- * @author Tong Nhat
+ * @author Admin
  */
 public class timetable extends HttpServlet {
 

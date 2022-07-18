@@ -31,7 +31,7 @@ public class CouseDBContext extends DBContext<Couse> {
                 a.setId(rs.getInt("id"));
                 a.setSlot(rs.getInt("slot"));
                 a.setDate(rs.getDate("date"));
-                //a.setGroup(rs.getString("group"));
+                a.setGroup(new Group(rs.getString("group")));
                 a.setName(rs.getString("name"));
                 //a.setCourse(rs.getString("course"));
                 //a.setInstructor(rs.getString("instructor"));
@@ -59,7 +59,7 @@ public class CouseDBContext extends DBContext<Couse> {
                 a.setSlot(slot);
                 a.setId(rs.getInt("id"));
                 a.setDate(rs.getDate("date"));
-                //a.setGroup(rs.getString("group"));
+                a.setGroup(new Group(rs.getString("group")));
                 a.setName(rs.getString("name"));
                 //a.setCourse(rs.getString("course"));
                 //a.setInstructor(rs.getString("instructor"));
