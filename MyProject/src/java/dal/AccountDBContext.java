@@ -15,11 +15,11 @@ import model.Instructor;
 
 /**
  *
- * @author Ngo Tung Son
+ * @author Admin
  */
 public class AccountDBContext extends DBContext<Account> {
 
-   public boolean isExistInDB(String name, String password){
+    public boolean isExistInDB(String name, String password){
         try {
             PreparedStatement sql = connection.prepareStatement("select * from [Account] where name =? and password=?");
             sql.setString(1, name);
@@ -82,7 +82,6 @@ public class AccountDBContext extends DBContext<Account> {
     public boolean delete(Account model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
     
 
 }

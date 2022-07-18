@@ -12,6 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.Account;
 
 /**
@@ -58,16 +59,17 @@ public class LoginController extends HttpServlet {
     throws ServletException, IOException {
         String user = request.getParameter("user");
         String pass = request.getParameter("pass");
-        AccountDBContext db = new AccountDBContext();
-        Account account = db.getAccountByUsernamePassword(user, pass);
-        if(account != null)
-        {
-            response.getWriter().println("hello " + account.getDisplayName());
+        System.out.println(user+""+pass);
+        AccountDBContext aDBC = new AccountDBContext();
+        //
+        if(false == aDBC.isExistInDB(user, pass)){
+            response.getWriter().print("Login Failed !");
+            return;
         }
-        else
-        {
-            response.getWriter().println("login failed!");
-        }
+        Account acc = aDBC.getAccount(user, pass);
+        HttpSession thisSession = request.getSession();
+        thisSession.setAttribute("acc", acc);
+        response.getWriter().print("Login Success,hello "+acc.getInstructor().getName()+" !");
     }
 
     

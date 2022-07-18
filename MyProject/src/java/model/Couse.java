@@ -20,6 +20,9 @@ public class Couse {
     private Date date;
     private int numberOfWeek;
 
+    public Couse() {
+    }
+
     public int getId() {
         return id;
     }
@@ -28,7 +31,8 @@ public class Couse {
         this.id = id;
     }
 
-    public Couse() {
+    public Couse(int id) {
+        this.id=id;
     }
 
     public String getName() {
@@ -82,7 +86,7 @@ public class Couse {
     }
  @Override
     public String toString() {
-        return "Lesson{" + "id=" + id + ", group=" + group + "\n, name=" + name + ", slot=" + slot + ", room=" + room + "\n, date=" + date + ", numberOfWeek=" + numberOfWeek + '}';
+        return "Couse{" + "id=" + id + ", group=" + group + "\n, name=" + name + ", slot=" + slot + ", room=" + room + "\n, date=" + date + ", numberOfWeek=" + numberOfWeek + '}';
     }
    public String toString1() {
         return group.getId() + "<br>-" + group.getSubject().getId() + "<br>at " + room;
