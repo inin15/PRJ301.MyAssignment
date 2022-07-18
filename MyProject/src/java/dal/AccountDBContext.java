@@ -21,7 +21,7 @@ public class AccountDBContext extends DBContext<Account> {
 
     public boolean isExistInDB(String name, String password){
         try {
-            PreparedStatement sql = connection.prepareStatement("select * from [Account] where name =? and password=?");
+            PreparedStatement sql = connection.prepareStatement("select * from [Account] where username =? and password=?");
             sql.setString(1, name);
             sql.setString(2, password);
             ResultSet rs = sql.executeQuery();
@@ -36,7 +36,7 @@ public class AccountDBContext extends DBContext<Account> {
     
     public Account getAccount(String name, String password){
         try {
-            PreparedStatement sql = connection.prepareStatement("select [Account].*,[Instructor].name as InstructorName from [Account] join [Instructor] on [Account].InstructorID = [Instructor].id where [Account].name =? and [Account].password=?");
+            PreparedStatement sql = connection.prepareStatement("select [Account].*,[Instructor].name as InstructorName from [Account] join [Instructor] on [Account].InstructorID = [Instructor].id where [Account].username =? and [Account].password=?");
             sql.setString(1, name);
             sql.setString(2, password);
             ResultSet rs = sql.executeQuery();
