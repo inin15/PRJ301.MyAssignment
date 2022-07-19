@@ -56,12 +56,12 @@ public class timetable1 extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession aSession = request.getSession();
-        Account acc=(Account)aSession.getAttribute("acc");
-        if(acc==null){
+        Account acc = (Account) aSession.getAttribute("acc");
+        if (acc == null) {
             response.getWriter().print("access denied");
             return;
         }
-        
+
         //input: no
         //output: campusList
         //        weekList
@@ -95,22 +95,24 @@ public class timetable1 extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession aSession = request.getSession();
-        Account acc=(Account)aSession.getAttribute("acc");
-        if(acc==null){
+        Account acc = (Account) aSession.getAttribute("acc");
+        if (acc == null) {
             response.getWriter().print("access denied");
             return;
         }
-        
+
         String howToView = request.getParameter("howToView");
         if (howToView.equals("viewInThisPage2")) {
             return;
-        }else if(howToView.equals("View")){
+        } else if (howToView.equals("View")) {
             //tiep tuc
         }
         ArrayList<String> campusList = new ArrayList<>();
         campusList.add("FU-HL");
         campusList.add("FU-Hồ Chí Minh");
         campusList.add("FU-Đà Nẵng");
+        campusList.add("FU-Quy Nhơn");
+        campusList.add("FU-Cần Thơ");
         request.setAttribute("campusList", campusList);
         WeeklyDBContext wDBC = new WeeklyDBContext();
         ArrayList<Weekly> weekList = wDBC.list();
@@ -137,10 +139,14 @@ public class timetable1 extends HttpServlet {
         //return output statusList
         ArrayList<String> statusList = new ArrayList<>();
         StudentCouseDBContext slDBC = new StudentCouseDBContext();
-        for(Couse a: couses){
+        for (Couse a : couses) {
             int status = slDBC.getStatus(a);
-            if(status ==0){continue;}
-            if(status >0){statusList.add(a.getId()+"_"+slDBC.getStatus(a));}
+            if (status == 0) {
+                continue;
+            }
+            if (status > 0) {
+                statusList.add(a.getId() + "_" + slDBC.getStatus(a));
+            }
         }
         request.setAttribute("statuses", statusList);
         request.getRequestDispatcher("view/weeklytimetable.jsp").forward(request, response);

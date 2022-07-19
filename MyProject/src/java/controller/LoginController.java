@@ -62,7 +62,7 @@ public class LoginController extends HttpServlet {
         System.out.println(user+""+pass);
         AccountDBContext aDBC = new AccountDBContext();
         //
-        if(false == aDBC.isExistInDB(user, pass)){
+        if(false == aDBC.getAccountByUsernamePassword(user, pass)){
             response.getWriter().print("Login Failed !");
             return;
         }

@@ -22,7 +22,9 @@ public class Group {
     }
 
     public Group(String string) {
-           }
+   }
+
+ 
 
     public String getId() {
         return id;

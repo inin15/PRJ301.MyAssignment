@@ -19,7 +19,7 @@ import model.Instructor;
  */
 public class AccountDBContext extends DBContext<Account> {
 
-    public boolean isExistInDB(String name, String password){
+    public boolean getAccountByUsernamePassword(String name, String password){
         try {
             PreparedStatement sql = connection.prepareStatement("select * from [Account] where username =? and password=?");
             sql.setString(1, name);
